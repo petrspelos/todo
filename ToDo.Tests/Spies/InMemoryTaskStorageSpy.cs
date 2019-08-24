@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ToDo.Entities;
+using ToDo.Storage;
 
-namespace ToDo.Tests
+namespace ToDo.Tests.Spies
 {
     public class InMemoryTaskStorageSpy : ITaskStorage
     {

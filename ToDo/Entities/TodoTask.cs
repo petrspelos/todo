@@ -1,4 +1,4 @@
-﻿namespace ToDo
+﻿namespace ToDo.Entities
 {
     public class TodoTask
     {

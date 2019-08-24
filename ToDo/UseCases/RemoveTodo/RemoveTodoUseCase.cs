@@ -1,4 +1,6 @@
-﻿namespace ToDo
+﻿using ToDo.Storage;
+
+namespace ToDo.UseCases.RemoveTodo
 {
     public class RemoveTodoUseCase : IRemoveTodoUseCase
     {

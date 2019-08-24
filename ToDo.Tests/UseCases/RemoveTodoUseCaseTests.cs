@@ -1,6 +1,8 @@
-﻿using Xunit;
+﻿using ToDo.Tests.Spies;
+using ToDo.UseCases.RemoveTodo;
+using Xunit;
 
-namespace ToDo.Tests
+namespace ToDo.Tests.UseCases
 {
     public class RemoveTodoUseCaseTests
     {

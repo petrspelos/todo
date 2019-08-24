@@ -1,4 +1,7 @@
-﻿namespace ToDo.Tests
+﻿using ToDo.Entities;
+using ToDo.Storage;
+
+namespace ToDo.Tests.Stubs
 {
     public class TaskStorageStub : ITaskStorage
     {

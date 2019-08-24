@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ToDo.Tests.Spies;
+using ToDo.UseCases.ListTodos;
 using Xunit;
 
-namespace ToDo.Tests
+namespace ToDo.Tests.UseCases
 {
     public class ListTodosUseCaseTests
     {

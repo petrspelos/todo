@@ -1,4 +1,4 @@
-﻿namespace ToDo
+﻿namespace ToDo.UseCases.AddTodo
 {
     public interface IAddTodoUseCase
     {

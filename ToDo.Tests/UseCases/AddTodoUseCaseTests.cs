@@ -1,7 +1,11 @@
 ﻿using System.Linq;
+using ToDo.Storage;
+using ToDo.Tests.Spies;
+using ToDo.Tests.Stubs;
+using ToDo.UseCases.AddTodo;
 using Xunit;
 
-namespace ToDo.Tests
+namespace ToDo.Tests.UseCases
 {
     public class AddTodoUseCaseTests
     {

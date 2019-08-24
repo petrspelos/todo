@@ -1,4 +1,6 @@
-﻿namespace ToDo
+﻿using ToDo.Entities;
+
+namespace ToDo.UseCases.ListTodos
 {
     public interface IListTodosUseCase
     {

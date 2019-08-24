@@ -1,4 +1,4 @@
-﻿namespace ToDo
+﻿namespace ToDo.UseCases.RemoveTodo
 {
     public interface IRemoveTodoUseCase
     {

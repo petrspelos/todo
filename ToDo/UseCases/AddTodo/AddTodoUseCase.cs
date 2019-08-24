@@ -1,4 +1,7 @@
-﻿namespace ToDo
+﻿using ToDo.Entities;
+using ToDo.Storage;
+
+namespace ToDo.UseCases.AddTodo
 {
     public class AddTodoUseCase : IAddTodoUseCase
     {
