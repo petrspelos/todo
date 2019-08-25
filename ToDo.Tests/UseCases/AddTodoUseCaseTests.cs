@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using Moq;
+﻿using Moq;
+using System.Linq;
 using ToDo.Entities;
 using ToDo.Storage;
 using ToDo.Tests.Spies;
-using ToDo.Tests.Stubs;
 using ToDo.UseCases.AddTodo;
 using Xunit;
 
