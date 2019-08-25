@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Moq;
+using ToDo.Entities;
 using ToDo.Storage;
 using ToDo.Tests.Spies;
 using ToDo.Tests.Stubs;
@@ -24,13 +25,14 @@ namespace ToDo.Tests.UseCases
         [Fact]
         public void NewTask_GetsAdded()
         {
-            var storageSpy = new InMemoryTaskStorageSpy();
-            IAddTodoUseCase useCase = new AddTodoUseCase(storageSpy);
+            var storageMock = new Mock<ITaskStorage>();
+            IAddTodoUseCase useCase = new AddTodoUseCase(storageMock.Object);
+            const string taskName = "Task";
 
-            useCase.Execute("Task");
+            useCase.Execute(taskName);
 
-            Assert.Single(storageSpy.Tasks);
-            Assert.Equal("Task", storageSpy.Tasks.First());
+            storageMock.Verify((s) => s.Store(It.Is<TodoTask>((t) => t.Description == taskName)));
+            storageMock.VerifyNoOtherCalls();
         }
 
         [Fact]
