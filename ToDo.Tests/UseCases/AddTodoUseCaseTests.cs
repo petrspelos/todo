@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Moq;
 using ToDo.Storage;
 using ToDo.Tests.Spies;
 using ToDo.Tests.Stubs;
@@ -10,12 +11,14 @@ namespace ToDo.Tests.UseCases
     public class AddTodoUseCaseTests
     {
         [Fact]
-        public void NullTask_DoesNotThrow()
+        public void NullTask_DoesNotAdd()
         {
-            ITaskStorage storage = new TaskStorageStub();
-            IAddTodoUseCase useCase = new AddTodoUseCase(storage);
+            var storageMock = new Mock<ITaskStorage>();
+            IAddTodoUseCase useCase = new AddTodoUseCase(storageMock.Object);
 
             useCase.Execute(null);
+
+            storageMock.VerifyNoOtherCalls();
         }
 
         [Fact]
