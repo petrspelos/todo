@@ -4,6 +4,7 @@ using ToDo.Infrastructure;
 using ToDo.Storage;
 using ToDo.UseCases.AddTodo;
 using ToDo.UseCases.ListTodos;
+using ToDo.UseCases.PeekTodo;
 using ToDo.UseCases.RemoveTodo;
 
 namespace ToDo.ConsoleApp
@@ -25,6 +26,17 @@ namespace ToDo.ConsoleApp
                     useCase.Execute(args[1]);
                     break;
                 }
+                case "remove" when args.Length == 2:
+                {
+                    IRemoveTodoUseCase useCase = new RemoveTodoUseCase(storage);
+
+                    if (int.TryParse(args[1], out var id))
+                    {
+                        useCase.ExecuteById(id);
+                    }
+
+                    break;
+                }
                 case "list":
                 {
                     IListTodosUseCase useCase = new ListTodosUseCase(storage);
@@ -37,15 +49,12 @@ namespace ToDo.ConsoleApp
 
                     break;
                 }
-                case "remove" when args.Length == 2:
+                case "peek":
                 {
-                    IRemoveTodoUseCase useCase = new RemoveTodoUseCase(storage);
-                    
-                    if (int.TryParse(args[1], out var id))
-                    {
-                        useCase.ExecuteById(id);
-                    }
-                    
+                    IPeekTodoUseCase useCase = new PeekTodoUseCase(storage);
+                    var item = useCase.Execute();
+
+                    Console.WriteLine($"-> [{item.Id}] {item.Description}");
                     break;
                 }
             }
