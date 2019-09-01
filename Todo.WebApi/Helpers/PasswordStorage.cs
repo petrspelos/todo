@@ -21,7 +21,7 @@ namespace ToDo.WebApi.Helpers
             : base(message, inner) { }
     }
 
-    class PasswordStorage
+    public class PasswordStorage
     {
         // These constants may be changed without breaking existing hashes.
         public const int SALT_BYTES = 24;
