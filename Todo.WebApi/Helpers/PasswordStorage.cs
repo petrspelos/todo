@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Todo.WebApi.Helpers
+namespace ToDo.WebApi.Helpers
 {
     class InvalidHashException : Exception
     {

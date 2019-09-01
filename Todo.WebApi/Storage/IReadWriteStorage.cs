@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Todo.WebApi.Storage
+namespace ToDo.WebApi.Storage
 {
     public interface IReadWriteStorage<T>
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Todo.WebApi.Storage
+namespace ToDo.WebApi.Storage
 {
     public class JsonReadonlyStorage<T> : IReadonlyStorage<T>
     {

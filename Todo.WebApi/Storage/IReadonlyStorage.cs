@@ -1,6 +1,6 @@
 using System;
 
-namespace Todo.WebApi.Storage
+namespace ToDo.WebApi.Storage
 {
     public interface IReadonlyStorage<T>
     {

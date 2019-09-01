@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Todo.WebApi.Storage;
-using Todo.WebApi.Entities;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
+using ToDo.Entities;
+using ToDo.WebApi.Storage;
 
-namespace WebApi.Controllers
+namespace ToDo.WebApi.Controllers
 {
     [Authorize]
     [ApiController]

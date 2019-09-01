@@ -50,8 +50,9 @@ namespace ToDo.Storage
             return JsonConvert.DeserializeObject<TodoTask[]>(json);
         }
 
-        public async Task Remove(int id)
+        public Task Remove(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }

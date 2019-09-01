@@ -1,11 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Todo.WebApi.Entities;
+using ToDo.Entities;
 
-namespace Todo.WebApi.Storage
+namespace ToDo.WebApi.Storage
 {
     public class JsonReadWriteStorage<T> : IReadWriteStorage<T> where T : IUnique
     {

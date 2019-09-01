@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApi.Helpers;
-using WebApi.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using Todo.WebApi.Storage;
-using Todo.WebApi.Entities;
+using ToDo.Entities;
+using ToDo.WebApi.Entities;
+using ToDo.WebApi.Helpers;
+using ToDo.WebApi.Services;
+using ToDo.WebApi.Storage;
 
-namespace WebApi
+namespace ToDo.WebApi
 {
     public class Startup
     {

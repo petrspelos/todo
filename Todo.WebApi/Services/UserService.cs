@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Todo.WebApi.Entities;
-using Todo.WebApi.Helpers;
-using Todo.WebApi.Storage;
+using ToDo.WebApi.Entities;
+using ToDo.WebApi.Helpers;
+using ToDo.WebApi.Storage;
 
-namespace WebApi.Services
+namespace ToDo.WebApi.Services
 {
     public interface IUserService
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Todo.WebApi.Entities
+namespace ToDo.Entities
 {
     public interface IUnique
     {

@@ -1,6 +1,7 @@
 using System;
+using ToDo.Entities;
 
-namespace Todo.WebApi.Entities
+namespace ToDo.WebApi.Entities
 {
     public class User : IUnique
     {

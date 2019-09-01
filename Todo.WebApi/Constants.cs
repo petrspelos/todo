@@ -1,4 +1,4 @@
-namespace Todo.WebApi
+namespace ToDo.WebApi
 {
     public sealed class Constants
     {
