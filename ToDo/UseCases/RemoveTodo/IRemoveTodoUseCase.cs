@@ -1,7 +1,9 @@
-﻿namespace ToDo.UseCases.RemoveTodo
+﻿using System.Threading.Tasks;
+
+namespace ToDo.UseCases.RemoveTodo
 {
     public interface IRemoveTodoUseCase
     {
-        void ExecuteById(int id);
+        Task ExecuteById(int id);
     }
 }

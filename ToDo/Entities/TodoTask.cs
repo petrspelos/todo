@@ -1,8 +1,11 @@
-﻿namespace ToDo.Entities
+﻿using System;
+
+namespace ToDo.Entities
 {
     public class TodoTask
     {
-        public int Id { get; set; }
+        public int Position { get; set; }
+        public Guid Id { get; set; }
         public string Description { get; set; }
     }
 }

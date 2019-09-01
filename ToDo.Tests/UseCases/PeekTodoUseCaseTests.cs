@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using ToDo.Storage;
 using ToDo.UseCases.PeekTodo;
 using Xunit;
@@ -17,39 +18,39 @@ namespace ToDo.Tests.UseCases
         }
 
         [Fact]
-        public void NoTasks_ReturnsNull()
+        public async Task NoTasks_ReturnsNull()
         {
             var tasks = new TodoTask[0];
-            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => tasks);
+            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => Task.FromResult(tasks));
             IPeekTodoUseCase useCase = new PeekTodoUseCase(_storageMock.Object);
 
-            var task = useCase.Execute();
+            var task = await useCase.Execute();
 
             Assert.Null(task);
         }
 
         [Fact]
-        public void OneTask_ReturnsTheTask()
+        public async Task OneTask_ReturnsTheTask()
         {
             var tasks = CreateTasks("The Task");
 
-            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => tasks);
+            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => Task.FromResult(tasks));
             IPeekTodoUseCase useCase = new PeekTodoUseCase(_storageMock.Object);
 
-            var task = useCase.Execute();
+            var task = await useCase.Execute();
 
             Assert.Same(tasks[0], task);
         }
 
         [Fact]
-        public void TaskList_ReturnsLast()
+        public async Task TaskList_ReturnsLast()
         {
             var tasks = CreateTasks("First Task", "Second Task", "Last Task");
 
-            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => tasks);
+            _storageMock.Setup(s => s.RetrieveAll()).Returns(() => Task.FromResult(tasks));
             IPeekTodoUseCase useCase = new PeekTodoUseCase(_storageMock.Object);
 
-            var task = useCase.Execute();
+            var task = await useCase.Execute();
 
             Assert.Same(tasks.Last(), task);
         }
@@ -62,7 +63,7 @@ namespace ToDo.Tests.UseCases
             {
                 tasks[i] = new TodoTask
                 {
-                    Id = i,
+                    Position = i,
                     Description = descriptions[i]
                 };
             }

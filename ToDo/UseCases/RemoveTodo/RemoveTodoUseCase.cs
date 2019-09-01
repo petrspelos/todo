@@ -1,4 +1,5 @@
-﻿using ToDo.Storage;
+﻿using System.Threading.Tasks;
+using ToDo.Storage;
 
 namespace ToDo.UseCases.RemoveTodo
 {
@@ -11,7 +12,10 @@ namespace ToDo.UseCases.RemoveTodo
             _storage = storage;
         }
 
-        public void ExecuteById(int id)
-            => _storage.Remove(id);
+        public Task ExecuteById(int id)
+        {
+            _storage.Remove(id);
+            return Task.CompletedTask;
+        }
     }
 }

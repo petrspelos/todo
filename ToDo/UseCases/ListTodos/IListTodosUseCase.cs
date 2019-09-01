@@ -1,9 +1,10 @@
-﻿using ToDo.Entities;
+﻿using System.Threading.Tasks;
+using ToDo.Entities;
 
 namespace ToDo.UseCases.ListTodos
 {
     public interface IListTodosUseCase
     {
-        TodoTask[] Execute();
+        Task<TodoTask[]> Execute();
     }
 }

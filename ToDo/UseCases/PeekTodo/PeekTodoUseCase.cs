@@ -1,6 +1,7 @@
 ﻿using ToDo.Entities;
 using ToDo.Storage;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ToDo.UseCases.PeekTodo
 {
@@ -13,9 +14,9 @@ namespace ToDo.UseCases.PeekTodo
             _storage = storage;
         }
 
-        public TodoTask Execute()
+        public async Task<TodoTask> Execute()
         {
-            var tasks = _storage.RetrieveAll();
+            var tasks = await _storage.RetrieveAll();
 
             return tasks.Any() ? tasks.Last() : null;
         }

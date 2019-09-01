@@ -1,9 +1,10 @@
-﻿using ToDo.Entities;
+﻿using System.Threading.Tasks;
+using ToDo.Entities;
 
 namespace ToDo.UseCases.PeekTodo
 {
     public interface IPeekTodoUseCase
     {
-        TodoTask Execute();
+        Task<TodoTask> Execute();
     }
 }

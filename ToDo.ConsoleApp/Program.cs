@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using ToDo.Infrastructure;
 using ToDo.Storage;
 using ToDo.UseCases.AddTodo;
@@ -11,7 +13,7 @@ namespace ToDo.ConsoleApp
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             if (!args.Any()) { return; }
 
@@ -23,7 +25,7 @@ namespace ToDo.ConsoleApp
                 case "add" when args.Length == 2:
                 {
                     IAddTodoUseCase useCase = new AddTodoUseCase(storage);
-                    useCase.Execute(args[1]);
+                    await useCase.Execute(args[1]);
                     break;
                 }
                 case "remove" when args.Length == 2:
@@ -32,7 +34,7 @@ namespace ToDo.ConsoleApp
 
                     if (int.TryParse(args[1], out var id))
                     {
-                        useCase.ExecuteById(id);
+                        await useCase.ExecuteById(id);
                     }
 
                     break;
@@ -40,11 +42,11 @@ namespace ToDo.ConsoleApp
                 case "list":
                 {
                     IListTodosUseCase useCase = new ListTodosUseCase(storage);
-                    var result = useCase.Execute();
+                    var result = await useCase.Execute();
 
                     foreach (var item in result)
                     {
-                        Console.WriteLine($"[{item.Id}] {item.Description}");
+                        Console.WriteLine($"[{item.Position}] {item.Description}");
                     }
 
                     break;
@@ -52,9 +54,9 @@ namespace ToDo.ConsoleApp
                 case "peek":
                 {
                     IPeekTodoUseCase useCase = new PeekTodoUseCase(storage);
-                    var item = useCase.Execute();
+                    var item = await useCase.Execute();
 
-                    Console.WriteLine($"-> [{item.Id}] {item.Description}");
+                    Console.WriteLine($"-> [{item.Position}] {item.Description}");
                     break;
                 }
             }

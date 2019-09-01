@@ -1,4 +1,5 @@
-﻿using ToDo.Entities;
+﻿using System.Threading.Tasks;
+using ToDo.Entities;
 using ToDo.Storage;
 
 namespace ToDo.UseCases.ListTodos
@@ -12,6 +13,6 @@ namespace ToDo.UseCases.ListTodos
             _storage = storage; 
         }
 
-        public TodoTask[] Execute() => _storage.RetrieveAll();
+        public Task<TodoTask[]> Execute() => _storage.RetrieveAll();
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace ToDo.UseCases.AddTodo
+﻿using System.Threading.Tasks;
+
+namespace ToDo.UseCases.AddTodo
 {
     public interface IAddTodoUseCase
     {
-        void Execute(string description);
+        Task Execute(string description);
     }
 }

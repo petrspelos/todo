@@ -1,4 +1,5 @@
-﻿using ToDo.Entities;
+﻿using System.Threading.Tasks;
+using ToDo.Entities;
 using ToDo.Storage;
 
 namespace ToDo.UseCases.AddTodo
@@ -12,10 +13,10 @@ namespace ToDo.UseCases.AddTodo
             _storage = storage;
         }
 
-        public void Execute(string description)
+        public async Task Execute(string description)
         {
             if (description is null) { return; }
-            _storage.Store(new TodoTask { Description = description });
+            await _storage.Store(new TodoTask { Description = description });
         }
     }
 }

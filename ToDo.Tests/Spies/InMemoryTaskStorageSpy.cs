@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ToDo.Entities;
 using ToDo.Storage;
 
@@ -19,9 +20,13 @@ namespace ToDo.Tests.Spies
             Tasks = items.ToList();
         }
 
-        public void Store(TodoTask task) => Tasks.Add(task.Description);
+        public Task Store(TodoTask task)
+        {
+            Tasks.Add(task.Description);
+            return Task.CompletedTask;
+        }
 
-        public TodoTask[] RetrieveAll()
+        public Task<TodoTask[]> RetrieveAll()
         {
             var descriptions = Tasks.ToArray();
             var todoTasks = new TodoTask[descriptions.Length];
@@ -30,19 +35,20 @@ namespace ToDo.Tests.Spies
             {
                 todoTasks[index] = new TodoTask
                 {
-                    Id = index,
+                    Position = index,
                     Description = descriptions[index]
                 };
             }
 
-            return todoTasks;
+            return Task.FromResult(todoTasks);
         }
 
-        public void Remove(int id)
+        public Task Remove(int id)
         {
-            if (id < 0 || id >= Tasks.Count) { return; }
+            if (id < 0 || id >= Tasks.Count) { return Task.CompletedTask; }
             
             Tasks.RemoveAt(id);
+            return Task.CompletedTask;
         }
     }
 }

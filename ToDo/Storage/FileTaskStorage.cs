@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ToDo.Entities;
 using ToDo.Infrastructure;
 
@@ -15,10 +16,13 @@ namespace ToDo.Storage
             _fileSystem = fileSystem;
         }
 
-        public void Remove(int id)
-            => _fileSystem.RemoveLine(id, _fileName);
+        public Task Remove(int id)
+        {
+            _fileSystem.RemoveLine(id, _fileName);
+            return Task.CompletedTask;
+        }
 
-        public TodoTask[] RetrieveAll()
+        public Task<TodoTask[]> RetrieveAll()
         {
             var descriptions = _fileSystem.ReadAllLines(_fileName);
             var todoTasks = new TodoTask[descriptions.Length];
@@ -27,15 +31,18 @@ namespace ToDo.Storage
             {
                 todoTasks[index] = new TodoTask
                 {
-                    Id = index,
+                    Position = index,
                     Description = descriptions[index]
                 };
             }
 
-            return todoTasks;
+            return Task.FromResult(todoTasks);
         }
 
-        public void Store(TodoTask task)
-            => _fileSystem.AppendLine(task.Description, _fileName);
+        public Task Store(TodoTask task)
+        {
+            _fileSystem.AppendLine(task.Description, _fileName);
+            return Task.CompletedTask;
+        }
     }
 }
