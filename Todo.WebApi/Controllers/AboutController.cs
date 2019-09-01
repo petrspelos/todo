@@ -9,7 +9,7 @@ namespace ToDo.WebApi.Controllers
     public class AboutController : ControllerBase
     {
         [AllowAnonymous]
-        [HttpPost("app")]
+        [HttpGet]
         public IActionResult AboutApp()
             => Content("Personal_ToDo_Application");
     }

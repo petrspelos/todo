@@ -19,9 +19,9 @@ namespace ToDo.WebApi.IntegrationTests
         }
 
         [Fact]
-        public async Task ShouldReturnApplicationType()
+        public async Task GetRequest_ShouldReturnApplicationType()
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/about/app");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/about");
 
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
