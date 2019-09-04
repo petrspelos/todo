@@ -58,6 +58,28 @@ namespace ToDo.WebApi.Controllers
             return Ok("Task removed.");
         }
 
+        [HttpDelete("removemany")]
+        public IActionResult RemoveMany([FromBody]Guid[] ids)
+        {
+            var list = GetPublicList();
+            if (list is null) { return NotFound("The public list doesn't exist."); }
+
+            var taskIds = list.Tasks.Select(t => t.Id);
+            var containsInvalidId = ids.Any(id => !taskIds.Contains(id));
+
+            if (containsInvalidId)
+            {
+                return BadRequest("One or more of the ids passed in were not found.");
+            }
+
+            foreach (var id in ids)
+            {
+                Remove(id);
+            }
+
+            return Ok("Tasks removed.");
+        }
+
         private TodoList GetPublicList() => _storage.GetAll().FirstOrDefault(l => l.Name == "public");
     }
 }
