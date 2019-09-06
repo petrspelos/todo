@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ToDo.Entities;
 using ToDo.WebApi.Entities;
 using ToDo.WebApi.Helpers;
+using ToDo.WebApi.Repositories;
 using ToDo.WebApi.Services;
 using ToDo.WebApi.Storage;
 
@@ -32,6 +33,8 @@ namespace ToDo.WebApi.Tests
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IReadonlyStorage<User>, TestUserReadonlyStorage>();
             services.AddScoped<IReadWriteStorage<TodoList>, TestTaskReadWriteStorage>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITodoListRepository, TodoListRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
