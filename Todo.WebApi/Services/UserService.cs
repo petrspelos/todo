@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using ToDo.WebApi.Entities;
 using ToDo.WebApi.Helpers;
+using ToDo.WebApi.Repositories;
 using ToDo.WebApi.Storage;
 
 namespace ToDo.WebApi.Services
@@ -12,22 +13,22 @@ namespace ToDo.WebApi.Services
 
     public class UserService : IUserService
     {
-        private readonly IReadonlyStorage<User> _storage;
+        private readonly IUserRepository _users;
 
-        public UserService(IReadonlyStorage<User> storage)
+        public UserService(IUserRepository users)
         {
-            _storage = storage;
+            _users = users;
         }
 
         public async Task<User> Authenticate(string username, string password)
         {
-            var user = await Task.Run(() => _storage.GetByPredicate(x => x.Username == username));
+            var user = await _users.GetByName(username);
 
-            if(user is null) { return null; }
+            if (user != null && PasswordStorage.VerifyPassword(password, user.Password))
+            {
+                user.Password = null;
+            }
 
-            if(!PasswordStorage.VerifyPassword(password, user.Password)) { return null; }
-
-            user.Password = null;
             return user;
         }
     }

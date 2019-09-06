@@ -17,13 +17,15 @@ namespace ToDo.WebApi
                 .UseKestrel(options =>
                     {
                         options.Listen(IPAddress.Any, 5000);
+#if !DEBUG
                         options.Listen(IPAddress.Any, 80);
                         var certPath = Environment.GetEnvironmentVariable("CERTIFICATE_PATH");
                         var certPass = Environment.GetEnvironmentVariable("CERTIFICATE_PASS");
                         options.Listen(IPAddress.Any, 443, listenOptions =>
                         {
                             listenOptions.UseHttps(certPath, certPass);
-                        });
+                       });
+#endif
                     })
                 .UseStartup<Startup>()
                 .Build();

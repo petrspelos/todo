@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using ToDo.Entities;
+using ToDo.WebApi.Repositories;
 using ToDo.WebApi.Storage;
 
 namespace ToDo.WebApi.Controllers
@@ -12,17 +13,17 @@ namespace ToDo.WebApi.Controllers
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        private readonly IReadWriteStorage<TodoList> _storage;
+        private readonly ITodoListRepository _todoLists;
 
-        public TodoController(IReadWriteStorage<TodoList> storage)
+        public TodoController(ITodoListRepository todoLists)
         {
-            _storage = storage;
+            _todoLists = todoLists;
         }
 
         [HttpGet("list")]
         public IActionResult ListAll()
         {
-            var list = GetPublicList();
+            var list = _todoLists.GetPublic();
             if(list is null) { return NotFound("The public list doesn't exist."); }
 
             return new JsonResult(list.Tasks);
@@ -31,13 +32,13 @@ namespace ToDo.WebApi.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromBody]TodoTask task)
         {
-            var list = GetPublicList();
+            var list = _todoLists.GetPublic();
             if(list is null) { return NotFound("The public list doesn't exist."); }
 
             task.Id = Guid.NewGuid();
 
             list.Tasks.Add(task);
-            _storage.Store(list);
+            _todoLists.Store(list);
 
             return Ok();
         }
@@ -45,7 +46,7 @@ namespace ToDo.WebApi.Controllers
         [HttpDelete("remove")]
         public IActionResult Remove([FromBody]Guid id)
         {
-            var list = GetPublicList();
+            var list = _todoLists.GetPublic();
             if(list is null) { return NotFound("The public list doesn't exist."); }
 
             var taskToDelete = list.Tasks.FirstOrDefault(t => t.Id == id);
@@ -53,7 +54,7 @@ namespace ToDo.WebApi.Controllers
             if(taskToDelete is null) { return BadRequest("A task with this ID doesn't exist."); }
 
             list.Tasks.Remove(taskToDelete);
-            _storage.Store(list);
+            _todoLists.Store(list);
 
             return Ok("Task removed.");
         }
@@ -61,7 +62,7 @@ namespace ToDo.WebApi.Controllers
         [HttpDelete("removemany")]
         public IActionResult RemoveMany([FromBody]Guid[] ids)
         {
-            var list = GetPublicList();
+            var list = _todoLists.GetPublic();
             if (list is null) { return NotFound("The public list doesn't exist."); }
 
             var taskIds = list.Tasks.Select(t => t.Id);
@@ -79,7 +80,5 @@ namespace ToDo.WebApi.Controllers
 
             return Ok("Tasks removed.");
         }
-
-        private TodoList GetPublicList() => _storage.GetAll().FirstOrDefault(l => l.Name == "public");
     }
 }
