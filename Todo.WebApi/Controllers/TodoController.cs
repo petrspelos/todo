@@ -36,6 +36,7 @@ namespace ToDo.WebApi.Controllers
             if(list is null) { return NotFound("The public list doesn't exist."); }
 
             task.Id = Guid.NewGuid();
+            task.IsCompleted = false;
 
             list.Tasks.Add(task);
             _todoLists.Store(list);
