@@ -72,9 +72,6 @@ namespace ToDo.WebApi.IntegrationTests
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            Assert.Equal("Task Added.", responseContent);
             Assert.True(response.IsSuccessStatusCode);
         }
 
