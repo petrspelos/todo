@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -111,7 +110,7 @@ namespace ToDo.WebApi.IntegrationTests
         private void SetupAuthenticatedClient() =>
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Basic", Convert.ToBase64String(
-                    System.Text.Encoding.ASCII.GetBytes(
+                    Encoding.ASCII.GetBytes(
                         "User:Password")));
     }
 }
