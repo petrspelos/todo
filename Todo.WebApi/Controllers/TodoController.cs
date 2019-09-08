@@ -60,7 +60,7 @@ namespace ToDo.WebApi.Controllers
             list.Tasks.Add(task);
             _todoLists.Store(list);
 
-            return Ok();
+            return Ok("Task Added.");
         }
 
         [HttpDelete("remove")]
