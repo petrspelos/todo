@@ -35,6 +35,19 @@ namespace ToDo.WebApi.Controllers
             var list = _todoLists.GetPublic();
             if(list is null) { return NotFound("The public list doesn't exist."); }
 
+            if(task.Description.Length < 40)
+            {
+                task.Name = task.Description;
+                task.Description = string.Empty;
+            }
+            else
+            {
+                var descriptionSnip = task.Description.Substring(0, 37);
+                task.Name = $"{descriptionSnip}…";
+            }
+
+
+
             task.Id = Guid.NewGuid();
             task.IsCompleted = false;
 
