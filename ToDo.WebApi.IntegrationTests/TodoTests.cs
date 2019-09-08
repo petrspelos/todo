@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -47,9 +48,61 @@ namespace ToDo.WebApi.IntegrationTests
             var json = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<TodoTask[]>(json);
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Single(result);
-            Assert.Equal("Todo task", result[0].Description);
+            Assert.True(response.IsSuccessStatusCode);
+            Assert.Equal(2, result.Length);
+            Assert.Equal("Task 1", result[0].Description);
+        }
+
+
+        [Fact]
+        public async Task AuthenticatedRequest_ShouldAddNewTask()
+        {
+            var testTodoTask = new TodoTask
+            {
+                Description = "Test 1"
+            };
+
+            var json = JsonConvert.SerializeObject(testTodoTask);
+
+            SetupAuthenticatedClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/todo/add");
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            Assert.True(response.IsSuccessStatusCode);
+        }
+
+        [Fact]
+        public async Task AuthenticatedRequest_ShouldRemoveTask()
+        {
+            SetupAuthenticatedClient();
+            var json = JsonConvert.SerializeObject("76c4c3d2-757b-43d5-bce7-223c7d68db4a");
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/todo/remove");
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            Assert.True(response.IsSuccessStatusCode);
+        }
+
+        [Fact]
+        public async Task AuthenticatedRequest_ShouldRemoveMany()
+        {
+            SetupAuthenticatedClient();
+            var ids = new[] { "6328259d-07c7-4443-9973-9fac0404b9b2", "76c4c3d2-757b-43d5-bce7-223c7d68db4a" };
+            var json = JsonConvert.SerializeObject(ids);
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/todo/removemany");
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            Assert.True(response.IsSuccessStatusCode);
         }
 
         private void SetupAuthenticatedClient() =>
