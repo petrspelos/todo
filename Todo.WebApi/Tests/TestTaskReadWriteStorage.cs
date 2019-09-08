@@ -23,12 +23,14 @@ namespace ToDo.WebApi.Tests
                         new TodoTask
                         {
                             Id = Guid.Parse("6328259d-07c7-4443-9973-9fac0404b9b2"),
-                            Description = "Task 1"
+                            Description = "Task 1",
+                            IsCompleted = false
                         },
                         new TodoTask
                         {
                             Id = Guid.Parse("76c4c3d2-757b-43d5-bce7-223c7d68db4a"),
-                            Description = "Task 2"
+                            Description = "Task 2",
+                            IsCompleted = true
                         }
                     }
                 }
