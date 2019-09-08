@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -105,12 +106,6 @@ namespace ToDo.WebApi.IntegrationTests
             response.EnsureSuccessStatusCode();
 
             Assert.True(response.IsSuccessStatusCode);
-        }
-
-        [Fact]
-        public async Task TaskShouldBeIncompleteWhenFirstAdded()
-        {
-
         }
 
         private void SetupAuthenticatedClient() =>
