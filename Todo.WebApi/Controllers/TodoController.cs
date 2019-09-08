@@ -42,16 +42,7 @@ namespace ToDo.WebApi.Controllers
 
             if (task.Name is null)
             {
-                if (task.Description.Length < 40)
-                {
-                    task.Name = task.Description;
-                    task.Description = string.Empty;
-                }
-                else
-                {
-                    var descriptionSnip = task.Description.Substring(0, 37);
-                    task.Name = $"{descriptionSnip}…";
-                }
+                EnsureTaskHasName(ref task);
             }
 
             task.Id = Guid.NewGuid();
@@ -99,6 +90,20 @@ namespace ToDo.WebApi.Controllers
             }
 
             return Ok("Tasks removed.");
+        }
+
+        private void EnsureTaskHasName(ref TodoTask task)
+        {
+            if (task.Description.Length < 40)
+            {
+                task.Name = task.Description;
+                task.Description = string.Empty;
+            }
+            else
+            {
+                var descriptionSnip = task.Description.Substring(0, 37);
+                task.Name = $"{descriptionSnip}…";
+            }
         }
     }
 }
