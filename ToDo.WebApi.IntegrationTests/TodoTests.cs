@@ -51,6 +51,8 @@ namespace ToDo.WebApi.IntegrationTests
             Assert.True(response.IsSuccessStatusCode);
             Assert.Equal(2, result.Length);
             Assert.Equal("Task 1", result[0].Description);
+            Assert.False(result[0].IsCompleted);
+            Assert.True(result[1].IsCompleted);
         }
 
 
@@ -103,6 +105,12 @@ namespace ToDo.WebApi.IntegrationTests
             response.EnsureSuccessStatusCode();
 
             Assert.True(response.IsSuccessStatusCode);
+        }
+
+        [Fact]
+        public async Task TaskShouldBeIncompleteWhenFirstAdded()
+        {
+
         }
 
         private void SetupAuthenticatedClient() =>
