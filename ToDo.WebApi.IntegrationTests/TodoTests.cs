@@ -55,7 +55,6 @@ namespace ToDo.WebApi.IntegrationTests
             Assert.True(result[1].IsCompleted);
         }
 
-
         [Fact]
         public async Task AuthenticatedRequest_ShouldAddNewTask()
         {
@@ -91,6 +90,9 @@ namespace ToDo.WebApi.IntegrationTests
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            Assert.Equal("Task removed.", responseContent);
             Assert.True(response.IsSuccessStatusCode);
         }
 
@@ -107,6 +109,9 @@ namespace ToDo.WebApi.IntegrationTests
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            Assert.Equal("Tasks removed.", responseContent);
             Assert.True(response.IsSuccessStatusCode);
         }
 
