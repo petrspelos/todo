@@ -38,6 +38,21 @@ namespace ToDo.WebApi.IntegrationTests
         }
 
         [Fact]
+        public async Task WrongPasswordRequest_ShouldNotAuthorize()
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Basic", Convert.ToBase64String(
+                    Encoding.ASCII.GetBytes(
+                        "User:IncorrectPassword")));
+
+            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/todo/list");
+
+            var response = await _client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
         public async Task AuthenticatedRequest_ShouldGetListOfTasks()
         {
             SetupAuthenticatedClient();
