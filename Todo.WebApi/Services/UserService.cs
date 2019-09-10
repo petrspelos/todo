@@ -27,9 +27,10 @@ namespace ToDo.WebApi.Services
             if (user != null && PasswordStorage.VerifyPassword(password, user.Password))
             {
                 user.Password = null;
+                return user;
             }
-
-            return user;
+            
+            return null;
         }
     }
 }
