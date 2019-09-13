@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace ToDo.Application.Boundaries.Todo.Add
 {
     public interface IAddTodoUseCase
     {
-        void Execute(AddTodoInput input);
+        Task Execute(AddTodoInput input);
     }
 }
