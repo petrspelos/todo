@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.Entities", "ToDo.Entit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.WebApi.IntegrationTests", "ToDo.WebApi.IntegrationTests\ToDo.WebApi.IntegrationTests.csproj", "{5071D0A4-215A-4505-B6E2-F904AF5614F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.UseCases", "ToDo.UseCases\ToDo.UseCases.csproj", "{044183DF-A3CA-4698-8A8D-BB0786DD8BC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5071D0A4-215A-4505-B6E2-F904AF5614F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5071D0A4-215A-4505-B6E2-F904AF5614F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5071D0A4-215A-4505-B6E2-F904AF5614F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044183DF-A3CA-4698-8A8D-BB0786DD8BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044183DF-A3CA-4698-8A8D-BB0786DD8BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044183DF-A3CA-4698-8A8D-BB0786DD8BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044183DF-A3CA-4698-8A8D-BB0786DD8BC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
