@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Application.Repositories;
@@ -18,6 +19,11 @@ namespace ToDo.Infrastructure.InMemoryStorage.Repositories
         {
             _context.TodoTasks.Add((TodoTask)task);
             return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<ITodoTask>> GetAll()
+        {
+            return Task.FromResult(_context.TodoTasks.Select(t => (ITodoTask)t));
         }
     }
 }
