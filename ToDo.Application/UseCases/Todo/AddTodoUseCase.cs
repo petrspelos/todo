@@ -36,7 +36,7 @@ namespace ToDo.Application.UseCases.Todo
 
             await _repository.Add(task);
 
-            _output.Default(new AddTodoOutput(task.Id, task.Name, task.Description, task.DueDate));
+            _output.Default(new AddTodoOutput(task.Id, task.Name, task.Description, task.DueDate, task.IsCompleted));
         }
     }
 }

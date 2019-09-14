@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ToDo.Domain.Todos;
 
 namespace ToDo.Infrastructure.InMemoryStorage
 {
