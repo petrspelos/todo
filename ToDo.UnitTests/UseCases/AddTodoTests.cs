@@ -54,11 +54,17 @@ namespace ToDo.UnitTests.UseCases
             _outputMock.Verify(p => p.Error(It.Is<string>(s => s == "The name is too long.")));
         }
 
-        [Fact]
-        public async Task ValidData_ShouldReturnTask()
+        [Theory]
+        [InlineData("Name", "Description", "09/20/2019")]
+        [InlineData("Name", null, "09/20/2019")]
+        [InlineData("Name", "Description", null)]
+        [InlineData("Name", null, null)]
+        public async Task ValidData_ShouldReturnTask(string name, string description, string dueDateSource)
         {
-            var dueDate = new DateTime(2019, 9, 20);
-            var input = new AddTodoInput("Name", "Description", dueDate);
+            DateTime? dueDate = null;
+            if(dueDateSource != null) { dueDate = DateTime.Parse(dueDateSource); }
+
+            var input = new AddTodoInput(name, description, dueDate);
 
             AddTodoOutput output = null;
             Action<AddTodoOutput> onReceivedOutput = o => {
@@ -70,8 +76,8 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute(input);
 
             Assert.NotNull(output);
-            Assert.Equal("Name", output.TaskName);
-            Assert.Equal("Description", output.TaskDescription);
+            Assert.Equal(name, output.TaskName);
+            Assert.Equal(description, output.TaskDescription);
             Assert.Equal(dueDate, output.TaskDueDate);
 
             Assert.Single(_context.TodoLists);
