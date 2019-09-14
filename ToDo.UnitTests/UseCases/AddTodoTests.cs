@@ -80,12 +80,11 @@ namespace ToDo.UnitTests.UseCases
             Assert.Equal(description, output.TaskDescription);
             Assert.Equal(dueDate, output.TaskDueDate);
 
-            Assert.Single(_context.TodoLists);
-            Assert.Single(_context.TodoLists.First().Tasks);
-            Assert.Equal(_context.TodoLists.First().Tasks.First().Id, output.TaskId);
-            Assert.Equal(_context.TodoLists.First().Tasks.First().Name, output.TaskName);
-            Assert.Equal(_context.TodoLists.First().Tasks.First().Description, output.TaskDescription);
-            Assert.Equal(_context.TodoLists.First().Tasks.First().DueDate, output.TaskDueDate);
+            Assert.Single(_context.TodoTasks);
+            Assert.Equal(_context.TodoTasks.First().Id, output.TaskId);
+            Assert.Equal(_context.TodoTasks.First().Name, output.TaskName);
+            Assert.Equal(_context.TodoTasks.First().Description, output.TaskDescription);
+            Assert.Equal(_context.TodoTasks.First().DueDate, output.TaskDueDate);
         }
     }
 }

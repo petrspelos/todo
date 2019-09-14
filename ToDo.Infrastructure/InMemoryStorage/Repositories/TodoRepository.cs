@@ -16,10 +16,7 @@ namespace ToDo.Infrastructure.InMemoryStorage.Repositories
 
         public Task Add(ITodoTask task)
         {
-            var list = _context.TodoLists.FirstOrDefault();
-
-            list?.Tasks.Add((TodoTask)task);
-
+            _context.TodoTasks.Add((TodoTask)task);
             return Task.CompletedTask;
         }
     }

@@ -7,14 +7,11 @@ namespace ToDo.Infrastructure.InMemoryStorage
 {
     public sealed class ToDoContext
     {
-        public ICollection<TodoList> TodoLists { get; set; }
+        public ICollection<TodoTask> TodoTasks { get; set; }
 
         public ToDoContext()
         {
-            TodoLists = new Collection<TodoList>
-            {
-                new TodoList(Guid.NewGuid(), "public", new Collection<TodoTask>())
-            };
+            TodoTasks = new Collection<TodoTask>();
         }
     }
 }
