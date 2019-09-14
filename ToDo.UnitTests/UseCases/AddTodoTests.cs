@@ -76,6 +76,7 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute(input);
 
             Assert.NotNull(output);
+            Assert.NotEqual(Guid.Empty, output.TaskId);
             Assert.Equal(name, output.TaskName);
             Assert.Equal(description, output.TaskDescription);
             Assert.Equal(dueDate, output.TaskDueDate);
