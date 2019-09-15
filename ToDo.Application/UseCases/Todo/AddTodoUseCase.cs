@@ -32,11 +32,11 @@ namespace ToDo.Application.UseCases.Todo
                 return;
             }
 
-            var task = (TodoTask)_entityFactory.NewTodoTask(input.TaskName, input.TaskDescription, input.TaskDueDate);
+            var task = _entityFactory.NewTodoTask(input.TaskName, input.TaskDescription, input.TaskDueDate);
 
             await _repository.Add(task);
 
-            _output.Default(new AddTodoOutput(task.Id, task.Name, task.Description, task.DueDate, task.IsCompleted));
+            _output.Default(new AddTodoOutput(task));
         }
     }
 }

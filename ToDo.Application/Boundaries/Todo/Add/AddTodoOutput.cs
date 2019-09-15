@@ -1,4 +1,5 @@
 using System;
+using ToDo.Domain.Todos;
 
 namespace ToDo.Application.Boundaries.Todo.Add
 {
@@ -10,13 +11,14 @@ namespace ToDo.Application.Boundaries.Todo.Add
         public DateTime? TaskDueDate { get; private set; }
         public bool TaskIsCompleted { get; private set; }
 
-        public AddTodoOutput(Guid id, string name, string description, DateTime? dueDate, bool isCompleted)
+        public AddTodoOutput(ITodoTask t)
         {
-            TaskId = id;
-            TaskName = name;
-            TaskDescription = description;
-            TaskDueDate = dueDate;
-            TaskIsCompleted = isCompleted;
+            var task = (TodoTask)t;
+            TaskId = task.Id;
+            TaskName = task.Name;
+            TaskDescription = task.Description;
+            TaskDueDate = task.DueDate;
+            TaskIsCompleted = task.IsCompleted;
         }
     }
 }
