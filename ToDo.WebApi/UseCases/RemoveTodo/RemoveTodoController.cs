@@ -9,12 +9,12 @@ namespace ToDo.WebApi.UseCases.RemoveTodo
     [ApiController]
     [Authorize]
     [Route("api/todo")]
-    public sealed class AddTodoController : Controller
+    public sealed class RemoveTodoController : Controller
     {
         private readonly IRemoveTodoUseCase _useCase;
         private readonly RemoveTodoPresenter _presenter;
 
-        public AddTodoController(IRemoveTodoUseCase useCase, RemoveTodoPresenter presenter)
+        public RemoveTodoController(IRemoveTodoUseCase useCase, RemoveTodoPresenter presenter)
         {
             _useCase = useCase;
             _presenter = presenter;
