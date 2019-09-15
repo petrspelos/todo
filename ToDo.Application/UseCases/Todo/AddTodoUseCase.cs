@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ToDo.Application.Boundaries.Todo.Add;
 using ToDo.Application.Repositories;
 using ToDo.Domain;
-using ToDo.Domain.Todos;
 
 namespace ToDo.Application.UseCases.Todo
 {
