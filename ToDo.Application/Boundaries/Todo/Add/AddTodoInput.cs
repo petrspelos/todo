@@ -1,5 +1,5 @@
 using System;
-using ToDo.Domain.Todos;
+using ToDo.Domain;
 
 namespace ToDo.Application.Boundaries.Todo.Add
 {

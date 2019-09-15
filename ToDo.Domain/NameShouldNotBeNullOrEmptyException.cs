@@ -1,4 +1,4 @@
-namespace ToDo.Domain.Todos
+namespace ToDo.Domain
 {
     public sealed class NameShouldNotBeNullOrEmptyException : DomainException
     {
