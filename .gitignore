@@ -354,3 +354,6 @@ MigrationBackup/
 # JSON
 json/
 
+#VSCode
+.vscode/
+
