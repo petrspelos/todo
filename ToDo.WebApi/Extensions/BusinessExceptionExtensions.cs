@@ -1,0 +1,18 @@
+using Microsoft.Extensions.DependencyInjection;
+using ToDo.WebApi.Filters;
+
+namespace ToDo.WebApi.Extensions
+{
+    public static class BusinessExceptionExtensions
+    {
+        public static IServiceCollection AddBusinessExceptionFilter(this IServiceCollection services)
+        {
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(BusinessExceptionFilter));
+            });
+
+            return services;
+        }
+    }
+}
