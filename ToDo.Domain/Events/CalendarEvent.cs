@@ -2,12 +2,12 @@ using System;
 
 namespace ToDo.Domain.Events
 {
-    public class CalendarEvent
+    public class CalendarEvent : ICalendarEvent, IUnique
     {
-        public Guid Id { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public TimeSpan Duration { get; private set; }
+        public Guid Id { get; protected set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 namespace ToDo.Domain.Events
 {
-    public class ICalendarEvent
+    public interface ICalendarEvent
     {
     }
 }
