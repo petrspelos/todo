@@ -36,22 +36,23 @@ namespace ToDo.UnitTests.UseCases
         }
 
         [Fact]
-        public async Task MissingRequiredName_ShouldThrow()
+        public void MissingRequiredName_ShouldThrow()
         {
-            var input = new AddTodoInput(null, string.Empty, DateTime.Now);
-            await Assert.ThrowsAsync<Exception>(async () => {
-                await _useCase.Execute(input);
+            var exception = Assert.Throws<Exception>(() => {
+                new AddTodoInput(null, string.Empty, DateTime.Now);
             });
+
+            Assert.Equal("The name is required.", exception.Message);
         }
 
         [Fact]
-        public async Task NameTooLong_ReturnsError()
+        public void NameTooLong_ReturnsError()
         {
-            var input = new AddTodoInput("This name is too long, because it is longer than 40 characters.", string.Empty, DateTime.Now);
+            var exception = Assert.Throws<Exception>(() => {
+                new AddTodoInput("This name is too long, because it is longer than 40 characters.", string.Empty, DateTime.Now);
+            });
 
-            await _useCase.Execute(input);
-
-            _outputMock.Verify(p => p.Error(It.Is<string>(s => s == "The name is too long.")));
+            Assert.Equal("The name is too long.", exception.Message);
         }
 
         [Theory]

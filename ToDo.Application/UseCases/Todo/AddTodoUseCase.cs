@@ -9,7 +9,6 @@ namespace ToDo.Application.UseCases.Todo
 {
     public sealed class AddTodoUseCase : IAddTodoUseCase
     {
-        private const int MaxTaskNameLength = 40;
         private readonly IAddTodoOutputPort _output;
         private readonly ITodoRepository _repository;
         private readonly IEntityFactory _entityFactory;
@@ -23,14 +22,8 @@ namespace ToDo.Application.UseCases.Todo
 
         public async Task Execute(AddTodoInput input)
         {
-            if(input?.TaskName is null)
+            if(input is null)
                 throw new Exception();
-
-            if(input.TaskName.Length > MaxTaskNameLength)
-            {
-                _output.Error("The name is too long.");
-                return;
-            }
 
             var task = _entityFactory.NewTodoTask(input.TaskName, input.TaskDescription, input.TaskDueDate);
 
