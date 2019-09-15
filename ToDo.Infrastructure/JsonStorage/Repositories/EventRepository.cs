@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Application.Repositories;
 using ToDo.Domain.Events;
@@ -18,6 +20,11 @@ namespace ToDo.Infrastructure.JsonStorage.Repositories
             _context.CalendarEvents.Add((CalendarEvent)cEvent);
             _context.Serialize();
             return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<ICalendarEvent>> GetAll()
+        {
+            return Task.FromResult(_context.CalendarEvents.Select(e => (ICalendarEvent)e));
         }
     }
 }
