@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using ToDo.Application.Boundaries.Todo.Add;
 using ToDo.Application.Boundaries.Todo.List;
+using ToDo.Application.Boundaries.Todo.Remove;
 using ToDo.Application.UseCases.Todo;
 
 namespace ToDo.WebApi.Extensions
@@ -11,6 +12,7 @@ namespace ToDo.WebApi.Extensions
         {
             services.AddScoped<IAddTodoUseCase, AddTodoUseCase>();
             services.AddScoped<IListTodosUseCase, ListTodosUseCase>();
+            services.AddScoped<IRemoveTodoUseCase, RemoveTodoUseCase>();
 
             return services;
         }

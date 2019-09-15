@@ -20,7 +20,7 @@ namespace ToDo.WebApi.UseCases.ListTodos
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> List()
         {
             await _useCase.Execute();
             return _presenter.ViewModel;
