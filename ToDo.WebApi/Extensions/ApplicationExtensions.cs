@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using ToDo.Application.Boundaries.Event.Add;
+using ToDo.Application.Boundaries.Event.List;
 using ToDo.Application.Boundaries.Todo.Add;
 using ToDo.Application.Boundaries.Todo.List;
 using ToDo.Application.Boundaries.Todo.Remove;
@@ -16,6 +17,7 @@ namespace ToDo.WebApi.Extensions
             services.AddScoped<IListTodosUseCase, ListTodosUseCase>();
             services.AddScoped<IRemoveTodoUseCase, RemoveTodoUseCase>();
             services.AddScoped<IAddEventUseCase, AddEventUseCase>();
+            services.AddScoped<IListEventsUseCase, ListEventsUseCase>();
 
             return services;
         }

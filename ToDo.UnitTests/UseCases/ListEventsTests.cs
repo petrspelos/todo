@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using ToDo.Application.Boundaries.Event.List;
@@ -39,6 +40,37 @@ namespace ToDo.UnitTests.UseCases
             Assert.Empty(_context.CalendarEvents);
             Assert.NotNull(_output);
             Assert.Empty(_output.Events);
+        }
+
+        [Fact]
+        public async Task EventList_ShouldBeReturned()
+        {
+            var first = await SetupNewEventAsync("First", "Description", new DateTime(2019, 9, 16, 9, 0, 0), TimeSpan.FromHours(1));
+            var second = await SetupNewEventAsync("Second", "Description", new DateTime(2019, 9, 20), TimeSpan.FromDays(1));
+
+            await _useCase.Execute();
+
+            Assert.NotNull(_output);
+            Assert.Equal(2, _context.CalendarEvents.Count);
+            
+            Assert.Equal(_context.CalendarEvents.First().Id, _output.Events.First().Id);
+            Assert.Equal(_context.CalendarEvents.First().Name, _output.Events.First().Name);
+            Assert.Equal(_context.CalendarEvents.First().Description, _output.Events.First().Description);
+            Assert.Equal(_context.CalendarEvents.First().StartDate, _output.Events.First().StartDate);
+            Assert.Equal(_context.CalendarEvents.First().Duration, _output.Events.First().Duration);
+
+            Assert.Equal(_context.CalendarEvents.Last().Id, _output.Events.Last().Id);
+            Assert.Equal(_context.CalendarEvents.Last().Name, _output.Events.Last().Name);
+            Assert.Equal(_context.CalendarEvents.Last().Description, _output.Events.Last().Description);
+            Assert.Equal(_context.CalendarEvents.Last().StartDate, _output.Events.Last().StartDate);
+            Assert.Equal(_context.CalendarEvents.Last().Duration, _output.Events.Last().Duration);
+        }
+
+        private async Task<CalendarEvent> SetupNewEventAsync(string name, string description, DateTime startDate, TimeSpan duration)
+        {
+            var expected = _entityFactory.NewCalendarEvent(name, description, startDate, duration);
+            await _repository.Add(expected);
+            return (CalendarEvent)expected;
         }
     }
 }
