@@ -16,6 +16,7 @@ namespace ToDo.WebApi.Extensions
             services.AddScoped<IEntityFactory, EntityFactory>();
             services.AddSingleton<ToDoContext, ToDoContext>();
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
 
             return services;
         }

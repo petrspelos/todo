@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using ToDo.Application.Boundaries.Event.Add;
 using ToDo.Application.Boundaries.Todo.Add;
 using ToDo.Application.Boundaries.Todo.List;
 using ToDo.Application.Boundaries.Todo.Remove;
+using ToDo.WebApi.UseCases.AddEvent;
 using ToDo.WebApi.UseCases.AddTodo;
 using ToDo.WebApi.UseCases.ListTodos;
 using ToDo.WebApi.UseCases.RemoveTodo;
@@ -20,6 +22,9 @@ namespace ToDo.WebApi.Extensions
 
             services.AddScoped<RemoveTodoPresenter>();
             services.AddScoped<IRemoveTodoOutputPort, RemoveTodoPresenter>(x => x.GetRequiredService<RemoveTodoPresenter>());
+
+            services.AddScoped<AddEventPresenter>();
+            services.AddScoped<IAddEventOutputPort, AddEventPresenter>(x => x.GetRequiredService<AddEventPresenter>());
 
             return services;
         }
