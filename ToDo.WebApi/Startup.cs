@@ -31,6 +31,7 @@ namespace ToDo.WebApi
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
+            services.AddBusinessExceptionFilter();
             services.AddLocalAuthentication();
             services.AddUseCases();
             services.AddPresenters();

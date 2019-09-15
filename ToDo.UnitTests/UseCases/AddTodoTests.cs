@@ -9,6 +9,7 @@ using ToDo.Infrastructure.InMemoryStorage.Repositories;
 using System.Linq;
 using ToDo.Domain;
 using System.Threading.Tasks;
+using ToDo.Domain.Todos;
 
 namespace ToDo.UnitTests.UseCases
 {
@@ -35,11 +36,13 @@ namespace ToDo.UnitTests.UseCases
             });
         }
 
-        [Fact]
-        public void MissingRequiredName_ShouldThrow()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void MissingOrEmptyRequiredName_ShouldThrow(string name)
         {
-            var exception = Assert.Throws<Exception>(() => {
-                new AddTodoInput(null, string.Empty, DateTime.Now);
+            var exception = Assert.Throws<NameShouldNotBeNullOrEmptyException>(() => {
+                new AddTodoInput(name, string.Empty, DateTime.Now);
             });
 
             Assert.Equal("The name is required.", exception.Message);
@@ -48,7 +51,7 @@ namespace ToDo.UnitTests.UseCases
         [Fact]
         public void NameTooLong_ReturnsError()
         {
-            var exception = Assert.Throws<Exception>(() => {
+            var exception = Assert.Throws<NameIsTooLongException>(() => {
                 new AddTodoInput("This name is too long, because it is longer than 40 characters.", string.Empty, DateTime.Now);
             });
 

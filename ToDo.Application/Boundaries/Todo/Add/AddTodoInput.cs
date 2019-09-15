@@ -1,4 +1,5 @@
 using System;
+using ToDo.Domain.Todos;
 
 namespace ToDo.Application.Boundaries.Todo.Add
 {
@@ -11,11 +12,11 @@ namespace ToDo.Application.Boundaries.Todo.Add
 
         public AddTodoInput(string name, string description, DateTime? dueDate)
         {
-            if(name is null)
-                throw new Exception("The name is required.");
+            if(string.IsNullOrEmpty(name))
+                throw new NameShouldNotBeNullOrEmptyException("The name is required.");
 
             if(name.Length > MaxTaskNameLength)
-                throw new Exception("The name is too long.");
+                throw new NameIsTooLongException("The name is too long.");
 
             TaskName = name;
             TaskDescription = description;
