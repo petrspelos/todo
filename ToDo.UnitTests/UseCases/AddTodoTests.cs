@@ -59,8 +59,8 @@ namespace ToDo.UnitTests.UseCases
         }
 
         [Theory]
-        [InlineData("Name", "Description", "09/20/2019")]
-        [InlineData("Name", null, "09/20/2019")]
+        [InlineData("Name", "Description", "September 20, 2019")]
+        [InlineData("Name", null, "September 20, 2019")]
         [InlineData("Name", "Description", null)]
         [InlineData("Name", null, null)]
         public async Task ValidData_ShouldReturnTask(string name, string description, string dueDateSource)
