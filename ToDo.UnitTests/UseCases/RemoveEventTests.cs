@@ -18,7 +18,7 @@ namespace ToDo.UnitTests.UseCases
         private readonly ToDoContext _context;
         private readonly IEventRepository _repository;
         private readonly Mock<IRemoveEventOutputPort> _outputMock;
-        private RemoveEventOutput _output;
+        private RemoveEventOutput? _output;
         private readonly IRemoveEventUseCase _useCase;
 
         public RemoveEventTests()
@@ -38,7 +38,7 @@ namespace ToDo.UnitTests.UseCases
         public async Task NullInput_ShouldThrow()
         {
             await Assert.ThrowsAsync<Exception>(async () => {
-                await _useCase.Execute(null);
+                await _useCase.Execute(null!);
             });
         }
 
@@ -53,7 +53,7 @@ namespace ToDo.UnitTests.UseCases
         [Fact]
         public async Task ValidGuid_ShouldRemoveEvent()
         {
-            var other = await SetupNewEventAsync("Other event", null, new DateTime(2022, 2, 2), TimeSpan.FromMinutes(45));
+            var other = await SetupNewEventAsync("Other event", null!, new DateTime(2022, 2, 2), TimeSpan.FromMinutes(45));
             var target = await SetupNewEventAsync("EventName", "Description", new DateTime(2020, 1, 1), TimeSpan.FromMinutes(30));
 
             await _useCase.Execute(new RemoveEventInput(target.Id));

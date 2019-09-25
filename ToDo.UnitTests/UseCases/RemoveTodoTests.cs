@@ -19,7 +19,7 @@ namespace ToDo.UnitTests
         private readonly ITodoRepository _repository;
         private readonly Mock<IRemoveTodoOutputPort> _outputMock;
         private readonly IRemoveTodoUseCase _useCase;
-        private RemoveTodoOutput _output;
+        private RemoveTodoOutput? _output;
 
         public RemoveTodoTests()
         {
@@ -36,7 +36,7 @@ namespace ToDo.UnitTests
         public async Task NullInput_ShouldThrow()
         {
             await Assert.ThrowsAsync<Exception>(async () => {
-                await _useCase.Execute(null);
+                await _useCase.Execute(null!);
             });
         }
 
@@ -55,13 +55,13 @@ namespace ToDo.UnitTests
         public async Task ValidId_ShouldRemoveTask()
         {
             var firstTask = await SetupNewTaskAsync("First Task", "Description", new DateTime(2019, 8, 20));
-            var secondTask = await SetupNewTaskAsync("Second Task", null, new DateTime(2020, 1, 1));
+            var secondTask = await SetupNewTaskAsync("Second Task", null!, new DateTime(2020, 1, 1));
             var input = new RemoveTodoInput(firstTask.Id);
 
             await _useCase.Execute(input);
 
             Assert.NotNull(_output);
-            Assert.Equal(firstTask.Id, _output.Id);
+            Assert.Equal(firstTask.Id, _output!.Id);
             Assert.Single(_context.TodoTasks);
             Assert.Equal(secondTask.Id, _context.TodoTasks.First().Id);
         }

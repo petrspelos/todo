@@ -32,7 +32,7 @@ namespace ToDo.UnitTests.UseCases
         public async Task NullInput_ShouldThrow()
         {
             await Assert.ThrowsAsync<Exception>(async () => {
-                await _useCase.Execute(null);
+                await _useCase.Execute(null!);
             });
         }
 
@@ -70,7 +70,7 @@ namespace ToDo.UnitTests.UseCases
 
             var input = new AddTodoInput(name, description, dueDate);
 
-            AddTodoOutput output = null;
+            AddTodoOutput? output = null;
             Action<AddTodoOutput> onReceivedOutput = o => {
                 output = o;
             };
@@ -80,7 +80,7 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute(input);
 
             Assert.NotNull(output);
-            Assert.NotEqual(Guid.Empty, output.TaskId);
+            Assert.NotEqual(Guid.Empty, output!.TaskId);
             Assert.Equal(name, output.TaskName);
             Assert.Equal(description, output.TaskDescription);
             Assert.Equal(dueDate, output.TaskDueDate);

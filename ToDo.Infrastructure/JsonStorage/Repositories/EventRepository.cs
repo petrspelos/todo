@@ -33,10 +33,7 @@ namespace ToDo.Infrastructure.JsonStorage.Repositories
 
         public Task<ICalendarEvent> Remove(Guid id)
         {
-            var toRemove = _context.CalendarEvents.SingleOrDefault(e => e.Id == id);
-
-            if(toRemove is null)
-                return null;
+            var toRemove = _context.CalendarEvents.Single(e => e.Id == id);
 
             _context.CalendarEvents.Remove(toRemove);
             _context.Serialize();

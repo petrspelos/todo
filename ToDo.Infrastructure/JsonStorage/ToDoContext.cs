@@ -18,6 +18,8 @@ namespace ToDo.Infrastructure.JsonStorage
 
         public ToDoContext(IFileSystem fileSystem)
         {
+            TodoTasks = new Collection<TodoTask>();
+            CalendarEvents = new Collection<CalendarEvent>();
             _fileSystem = fileSystem;
             DeserializeFromFile();
         }
@@ -36,14 +38,14 @@ namespace ToDo.Infrastructure.JsonStorage
 
         private async void DeserializeFromFile()
         {
-            TodoTasks = await DeserializeFromFile<TodoTask>(TasksFilePath) ?? new Collection<TodoTask>();
-            CalendarEvents = await DeserializeFromFile<CalendarEvent>(EventsFilePath) ?? new Collection<CalendarEvent>();
+            TodoTasks = await DeserializeFromFile<TodoTask>(TasksFilePath);
+            CalendarEvents = await DeserializeFromFile<CalendarEvent>(EventsFilePath);
         }
 
         private async Task<ICollection<T>> DeserializeFromFile<T>(string filePath)
         {
             if(!await _fileSystem.FileExists(filePath))
-                return null;
+                return new Collection<T>();
 
             var json = await _fileSystem.GetFileContents(filePath);
             return JsonConvert.DeserializeObject<Collection<T>>(json);

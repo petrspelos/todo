@@ -23,13 +23,13 @@ namespace ToDo.WebApi.Services
         {
             var user = _users.GetByPredicate(u => u.Username == username);
 
-            if (user != null && PasswordStorage.VerifyPassword(password, user.Password))
+            if (user != null && PasswordStorage.VerifyPassword(password, user.Password ?? string.Empty))
             {
                 user.Password = null;
                 return Task.FromResult(user);
             }
             
-            return null;
+            return null!;
         }
     }
 }

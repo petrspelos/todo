@@ -33,10 +33,7 @@ namespace ToDo.Infrastructure.JsonStorage.Repositories
 
         public Task<ITodoTask> Remove(Guid id)
         {
-            var toRemove = _context.TodoTasks.SingleOrDefault(t => t.Id == id);
-
-            if(toRemove is null)
-                return null;
+            var toRemove = _context.TodoTasks.Single(t => t.Id == id);
 
             _context.TodoTasks.Remove(toRemove);
             _context.Serialize();

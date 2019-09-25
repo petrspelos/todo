@@ -7,6 +7,11 @@ namespace ToDo.WebApi.UseCases.AddTodo
     {
         public IActionResult ViewModel { get; private set; }
 
+        public AddTodoPresenter()
+        {
+            ViewModel = new NoContentResult();
+        }
+        
         public void Default(AddTodoOutput output)
         {
             var response = new AddTodoTaskResponse
