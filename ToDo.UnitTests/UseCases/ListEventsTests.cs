@@ -19,7 +19,7 @@ namespace ToDo.UnitTests.UseCases
         private readonly IEventRepository _repository;
         private readonly IListEventsUseCase _useCase;
         private Mock<IListEventsOutputPort> _outputMock;
-        private ListEventsOutput _output;
+        private ListEventsOutput? _output;
 
         public ListEventsTests()
         {
@@ -39,7 +39,7 @@ namespace ToDo.UnitTests.UseCases
 
             Assert.Empty(_context.CalendarEvents);
             Assert.NotNull(_output);
-            Assert.Empty(_output.Events);
+            Assert.Empty(_output!.Events);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace ToDo.UnitTests.UseCases
             Assert.NotNull(_output);
             Assert.Equal(2, _context.CalendarEvents.Count);
             
-            Assert.Equal(_context.CalendarEvents.First().Id, _output.Events.First().Id);
+            Assert.Equal(_context.CalendarEvents.First().Id, _output!.Events.First().Id);
             Assert.Equal(_context.CalendarEvents.First().Name, _output.Events.First().Name);
             Assert.Equal(_context.CalendarEvents.First().Description, _output.Events.First().Description);
             Assert.Equal(_context.CalendarEvents.First().StartDate, _output.Events.First().StartDate);

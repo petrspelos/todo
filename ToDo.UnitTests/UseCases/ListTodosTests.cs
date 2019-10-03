@@ -20,7 +20,7 @@ namespace ToDo.UnitTests.UseCases
         private ITodoRepository _repository;
         private IListTodosUseCase _useCase;
         private Mock<IListTodosOutputPort> _outputMock;
-        private ListTodosOutput _output;
+        private ListTodosOutput? _output;
 
         public ListTodosTests()
         {
@@ -39,7 +39,7 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute();
 
             Assert.NotNull(_output);
-            Assert.Empty(_output.Tasks);
+            Assert.Empty(_output!.Tasks);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute();
 
             Assert.NotNull(_output);
-            Assert.Single(_output.Tasks);
+            Assert.Single(_output!.Tasks);
             Assert.Equal(expected.Id, _output.Tasks.First().Id);
             Assert.Equal(expected.Name, _output.Tasks.First().Name);
             Assert.Equal(expected.Description, _output.Tasks.First().Description);
@@ -60,13 +60,13 @@ namespace ToDo.UnitTests.UseCases
         public async Task MultipleTodos_ShouldReturnCorrectList()
         {
             var expected = new List<TodoTask>();
-            expected.Add(await SetupNewTaskAsync("FirstTask", null, null));
-            expected.Add(await SetupNewTaskAsync("SecondTask", null, null));
+            expected.Add(await SetupNewTaskAsync("FirstTask", null!, null));
+            expected.Add(await SetupNewTaskAsync("SecondTask", null!, null));
 
             await _useCase.Execute();
 
             Assert.NotNull(_output);
-            Assert.Equal(2, _output.Tasks.Count());
+            Assert.Equal(2, _output!.Tasks.Count());
             Assert.Equal("FirstTask", _output.Tasks.ElementAt(0).Name);
             Assert.Equal(expected.First().Id, _output.Tasks.First().Id);
             Assert.Equal("SecondTask", _output.Tasks.ElementAt(1).Name);

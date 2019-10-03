@@ -17,7 +17,7 @@ namespace ToDo.UnitTests.UseCases
         private readonly IAddEventUseCase _useCase;
         private readonly ToDoContext _context;
         private readonly Mock<IAddEventOutputPort> _outputMock;
-        private AddEventOutput _output;
+        private AddEventOutput? _output;
 
         public AddEventTests()
         {
@@ -34,7 +34,7 @@ namespace ToDo.UnitTests.UseCases
         public async Task NullValues_ShouldThrow()
         {
             await Assert.ThrowsAsync<Exception>(async () => {
-                await _useCase.Execute(null);
+                await _useCase.Execute(null!);
             });
         }
 
@@ -64,7 +64,7 @@ namespace ToDo.UnitTests.UseCases
             await _useCase.Execute(input);
 
             Assert.NotNull(_output);
-            Assert.NotEqual(Guid.Empty, _output.EventId);
+            Assert.NotEqual(Guid.Empty, _output!.EventId);
             Assert.Equal("Name", _output.EventName);
             Assert.Equal("Description", _output.EventDescription);
             Assert.Equal(new DateTime(2020, 1, 1), _output.EventStartDate);

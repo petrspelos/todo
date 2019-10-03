@@ -114,7 +114,7 @@ namespace ToDo.WebApi.Helpers
                 );
             }
 
-            byte[] salt = null;
+            byte[]? salt = null;
             try {
                 salt = Convert.FromBase64String(split[SALT_INDEX]);
             }
@@ -130,7 +130,7 @@ namespace ToDo.WebApi.Helpers
                 );
             }
 
-            byte[] hash = null;
+            byte[]? hash = null;
             try {
                 hash = Convert.FromBase64String(split[PBKDF2_INDEX]);
             }

@@ -9,6 +9,11 @@ namespace ToDo.WebApi.UseCases.ListEvents
     {
         public IActionResult ViewModel { get; private set; }
 
+        public ListEventsPresenter()
+        {
+            ViewModel = new NoContentResult();
+        }
+        
         public void Default(ListEventsOutput output)
         {
             var result = new List<CalendarEventModel>();

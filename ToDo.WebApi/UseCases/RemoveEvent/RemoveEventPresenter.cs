@@ -7,6 +7,11 @@ namespace ToDo.WebApi.UseCases.RemoveEvent
     {
         public IActionResult ViewModel { get; private set; }
 
+        public RemoveEventPresenter()
+        {
+            ViewModel = new NoContentResult();
+        }
+
         public void Default(RemoveEventOutput output)
         {
             var response = new RemoveEventResponse

@@ -32,7 +32,7 @@ namespace ToDo.WebApi.Helpers
             if (!Request.Headers.ContainsKey("Authorization"))
                 return AuthenticateResult.Fail("Missing Authorization Header");
 
-            User user = null;
+            User? user = null;
             try 
             {
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
@@ -47,7 +47,7 @@ namespace ToDo.WebApi.Helpers
                 return AuthenticateResult.Fail("Invalid Authorization Header");
             }
 
-            if (user == null)
+            if (user is null)
                 return AuthenticateResult.Fail("Invalid Username or Password");
 
             var claims = new[] { 

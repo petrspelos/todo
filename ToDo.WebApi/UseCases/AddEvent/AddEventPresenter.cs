@@ -7,6 +7,11 @@ namespace ToDo.WebApi.UseCases.AddEvent
     {
         public IActionResult ViewModel { get; private set; }
 
+        public AddEventPresenter()
+        {
+            ViewModel = new NoContentResult();
+        }
+        
         public void Default(AddEventOutput output)
         {
             var result = new AddEventResponse

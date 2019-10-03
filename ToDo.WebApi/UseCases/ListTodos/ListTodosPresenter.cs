@@ -8,6 +8,11 @@ namespace ToDo.WebApi.UseCases.ListTodos
     public sealed class ListTodosPresenter : IListTodosOutputPort
     {
         public IActionResult ViewModel { get; private set; }
+        
+        public ListTodosPresenter()
+        {
+            ViewModel = new NoContentResult();
+        }
 
         public void Default(ListTodosOutput output)
         {
