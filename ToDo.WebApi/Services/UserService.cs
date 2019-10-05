@@ -25,7 +25,7 @@ namespace ToDo.WebApi.Services
 
             if (user != null && PasswordStorage.VerifyPassword(password, user.Password ?? string.Empty))
             {
-                user.Password = null;
+                user.Password = "";
                 return Task.FromResult(user);
             }
             
